@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffe6f2;
+            background-image: url('paper-texture.jpg'); 
+            background-size: cover;
+            transition: background 1s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+        h1 {
+            color: #ff4081;
+            margin-top: 100px;
+            position: relative;
+            z-index: 2;
+        }
+        .buttons {
+            position: relative;
+            margin-top: 20px;
+            z-index: 2;
+        }
+        #yes {
+            background-color: #ff4081;
+            color: white;
+            padding: 10px 20px;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 2;
+        }
+        #no {
+            background-color: #ccc;
+            color: black;
+            padding: 10px 20px;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-left: 20px;
+            position: absolute;
+            z-index: 2;
+        }
+
+        .photo-board {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffc0cb;
+            overflow: hidden;
+            z-index: -1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Ensures better spacing */
+            gap: 20px; /* Spacing between photos */
+            padding: 30px;
+        }
+
+        .photo {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            transform: rotate(calc(-10deg + 20deg * var(--random-rotation)));
+        }
+       
+        .hearts {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            transform: rotate(-45deg);
+            position: absolute;
+            animation: float 3s linear infinite;
+        }
+        .hearts::before,
+        .hearts::after {
+            content: "";
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .hearts::before {
+            top: -10px;
+            left: 0;
+        }
+        .hearts::after {
+            top: 0;
+            left: 10px;
+        }
+        @keyframes float {
+            0% { opacity: 1; transform: translateY(0px) rotate(-45deg); }
+            100% { opacity: 0; transform: translateY(-100vh) rotate(-45deg); }
+        }
+        
+        .message {
+            display: none;
+            font-size: 74px;
+            font-family: 'Brush Script MT', cursive;
+            color: #ff4081;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+	    text-shadow: 
+            -2px -2px 0 #FFFFFF,  
+             2px -2px 0 #FFFFFF,  
+            -2px 2px 0 #FFFFFF,  
+             2px 2px 0 #FFFFFF; 
+}
+        }
+    </style>
+</head>
+<body>
+    <h1 id="question">Grinch, will you be my Valentine? 💖</h1>
+    <div class="buttons" id="buttons">
+        <button id="yes">Yes</button>
+        <button id="no">No</button>
+    </div>
+    
+    <div id="photo-board" class="photo-board"></div>
+    <div id="message" class="message">Yess!! kenet aaref aslan. I love you soo muchhhh </div>
+    
+    <script>
+        let yesButton = document.getElementById('yes');
+        let noButton = document.getElementById('no');
+        let question = document.getElementById('question');
+        let buttons = document.getElementById('buttons');
+        let photoBoard = document.getElementById('photo-board');
+        let message = document.getElementById('message');
+        let yesSize = 20;
+        let noSize = 20;
+
+        noButton.addEventListener('mouseover', () => {
+            noButton.style.left = `${Math.random() * 50}%`;
+            noButton.style.top = `${Math.random() * 50}%`;
+        });
+
+        noButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            yesSize += 10;
+            noSize -= 5;
+            yesButton.style.fontSize = yesSize + 'px';
+            noButton.style.fontSize = noSize + 'px';
+        });
+
+        yesButton.addEventListener('click', () => {
+            photoBoard.style.display = 'grid'; // Ensure it's in grid mode
+            photoBoard.innerHTML = '';
+            question.style.display = 'none';
+            buttons.style.display = 'none';
+            message.style.display = 'block';
+            
+            const photos = [
+                'celine1.jpg', 'celine2.jpg', 'celine3.jpg', 'celine4.jpg', 'celine5.jpg',
+                'celine6.jpg', 'celine7.jpg', 'celine8.jpg', 'celine9.jpg', 'celine10.jpg',
+                'celine11.jpg', 'celine12.jpg', 'celine13.jpg', 'celine14.jpg', 'celine15.jpg', 'celine16.jpg', 'celine17.jpg', 'celine18.jpg', 'celine19.jpg', 'celine20.jpg',
+                'celine21.jpg', 'celine22.jpg', 'celine23.jpg', 'celine24.jpg', 'celine25.jpg',
+                'celine26.jpg', 'celine27.jpg', 'celine28.jpg', 'celine29.jpg', 'celine30.jpg', 'celine31.jpg', 'celine32.jpg', 'celine33.jpg', 'celine34.jpg', 'celine35.jpg',
+                'celine36.jpg', 'celine37.jpg', 'celine38.jpg', 'celine39.jpg', 'celine40.jpg',
+                'celine41.jpg', 'celine42.jpg', 'celine43.jpg', 'celine44.jpg', 'celine45.jpg', 'celine46.jpg', 'celine47.jpg', 'celine48.jpg', 'celine49.jpg', 'celine50.jpg',
+                'celine51.jpg', 'celine52.jpg', 'celine53.jpg', 'celine54.jpg', 'celine55.jpg',
+                'celine56.jpg', 'celine57.jpg', 'celine58.jpg'
+            ];
+            
+            photos.forEach(photo => {
+                let img = document.createElement('img');
+                img.src = photo;
+                img.className = 'photo';
+                img.style.setProperty('--random-rotation', Math.random());
+                photoBoard.appendChild(img);
+            });
+            
+            for (let i = 0; i < 30; i++) {
+                let heart = document.createElement('div');
+                heart.className = 'hearts';
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.top = `${Math.random() * 100}vh`;
+                heart.style.animationDuration = `${Math.random() * 2 + 1}s`;
+                document.body.appendChild(heart);
+            }
+        });
+    </script>
+</body>
+</html>
